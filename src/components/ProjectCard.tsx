@@ -69,16 +69,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
             )}
 
             {project.demoUrl && (
-              <a
+              <Link
                 href={project.demoUrl}
-                target="_blank"
-                rel="noreferrer"
                 className="touch-target px-5 py-3 border border-white/[0.08] hover:border-white/15 text-[#D1D5DB] hover:text-white transition-all flex items-center gap-2"
                 data-cursor-text="LIVE DEMO"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 <span>Live Demo</span>
-              </a>
+              </Link>
             )}
 
             {project.githubUrl && (

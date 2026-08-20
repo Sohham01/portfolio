@@ -72,9 +72,7 @@ export default function SalesMindAICaseStudy() {
 
             <div className="pt-2 flex flex-wrap items-center gap-2.5 font-mono text-[11px]">
               <a
-                href="https://sales-mind-ai-lemon.vercel.app/"
-                target="_blank"
-                rel="noreferrer"
+                href="/projects/salesmindai/demo"
                 className="touch-target px-5 py-2.5 bg-accent hover:bg-accent-dark active:scale-[0.98] text-white font-semibold transition-all flex items-center gap-2"
               >
                 <span>Live Demo</span>
@@ -92,10 +90,11 @@ export default function SalesMindAICaseStudy() {
               </a>
             </div>
 
-            <div className="mt-4 flex items-center gap-2 font-mono text-[10px] text-[#4B5563]">
-              <span className="uppercase tracking-wider">Demo access available</span>
-              <span className="text-[#2D3748]">—</span>
-              <span>contact for credentials</span>
+            <div className="mt-4 flex items-center gap-2 font-mono text-[10px]">
+              <a href="/projects/salesmindai/demo" className="text-accent hover:text-accent-light uppercase tracking-wider transition-colors">
+                Demo access available
+              </a>
+              <span className="text-[#2D3748]">→</span>
             </div>
           </div>
 

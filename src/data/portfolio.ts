@@ -117,7 +117,7 @@ export const PORTFOLIO_DATA = {
       featured: true,
       caseStudyUrl: "/projects/salesmindai",
       githubUrl: "https://github.com/Sohham01/SalesMindAI",
-      demoUrl: "https://sales-mind-ai-lemon.vercel.app/",
+      demoUrl: "/projects/salesmindai/demo",
       metrics: [
         { label: "AI Engine", value: "Multi-provider fallback" },
         { label: "CRM Workflows", value: "Scoring · Health · Tasks" },
@@ -262,7 +262,7 @@ export const PORTFOLIO_DATA = {
     currentExperiment: { name: "RAG-based AI assistant", desc: "with document memory" },
     currentlyLearning: { name: "Advanced ML & System Design", desc: "" },
     latestRepository: { name: "github.com/sohham-choudhary/salesmindai", url: "https://github.com/Sohham01/SalesMindAI" },
-    totalContributions: 1204,
+    totalContributions: 300,
     year: 2025
   }
 };
