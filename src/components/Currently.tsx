@@ -9,7 +9,7 @@ export function Currently() {
         <span className="tracking-widest">NOW</span>
       </div>
 
-      <h2 className="text-2xl sm:text-4xl font-bold tracking-[-0.02em] text-[#F3F4F6] font-sans uppercase mb-6">
+      <h2 className="text-2xl sm:text-4xl font-bold tracking-[-0.02em] text-[#F3F4F6] font-sans uppercase mb-8">
         WHAT I&apos;M WORKING TOWARD.
       </h2>
 
@@ -17,17 +17,22 @@ export function Currently() {
         {PORTFOLIO_DATA.nowFocus.map((item) => (
           <div
             key={item.number}
-            className="py-4 border-b border-white/[0.04] last:border-b-0"
+            className="py-5 border-b border-white/[0.04] last:border-b-0"
           >
             <div className="flex items-start gap-4">
               <span className="font-mono text-[11px] font-semibold text-[#4B5563] w-6 shrink-0 pt-0.5">
                 {item.number}
               </span>
               <div className="flex-1">
-                <h3 className="font-sans font-semibold text-[#F3F4F6] text-sm tracking-tight">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-[#6B7280] font-sans mt-1">
+                <div className="flex items-center gap-3">
+                  <h3 className="font-sans font-semibold text-[#F3F4F6] text-sm tracking-tight">
+                    {item.title}
+                  </h3>
+                  <span className="font-mono text-[9px] text-[#4B5563] uppercase tracking-widest px-1.5 py-0.5 bg-[#12151A] border border-white/[0.04]">
+                    {item.tag}
+                  </span>
+                </div>
+                <p className="text-[13px] text-[#6B7280] font-sans mt-1.5 leading-relaxed">
                   {item.description}
                 </p>
               </div>

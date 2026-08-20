@@ -10,7 +10,6 @@ export interface Project {
   caseStudyUrl?: string;
   githubUrl?: string;
   demoUrl?: string;
-  demoCredentials?: { username: string; password: string };
   metrics?: { label: string; value: string }[];
   architecture?: { from: string; to: string; label: string }[];
 }
@@ -119,15 +118,11 @@ export const PORTFOLIO_DATA = {
       caseStudyUrl: "/projects/salesmindai",
       githubUrl: "https://github.com/Sohham01/SalesMindAI",
       demoUrl: "https://sales-mind-ai-lemon.vercel.app/",
-      demoCredentials: {
-        username: "demo",
-        password: "Demo1234!"
-      },
       metrics: [
-        { label: "Live Demo Login", value: "demo / Demo1234!" },
-        { label: "AI Response Resilience", value: "Multi-Provider Fallback" },
-        { label: "CRM Workflow Automation", value: "Lead Scoring + Health Radar" },
-        { label: "Data Portability", value: "CSV / XLSX Pipeline Export" }
+        { label: "AI Engine", value: "Multi-provider fallback" },
+        { label: "CRM Workflows", value: "Scoring · Health · Tasks" },
+        { label: "Data Pipeline", value: "CSV/XLSX import & export" },
+        { label: "Deployment", value: "Vercel (Live)" }
       ],
       architecture: [
         { from: "React", to: "FastAPI", label: "Client" },
@@ -234,58 +229,36 @@ export const PORTFOLIO_DATA = {
     {
       number: "01",
       title: "DSA",
-      description: "Stronger algorithmic problem solving.",
+      description: "Building stronger problem-solving fundamentals through consistent algorithm practice.",
       tag: "CORE",
       progress: 88
     },
     {
       number: "02",
       title: "MACHINE LEARNING",
-      description: "Going deeper beyond introductory models.",
+      description: "Moving beyond introductory models and developing a deeper understanding of ML systems.",
       tag: "AI",
       progress: 82
     },
     {
       number: "03",
       title: "SOFTWARE ENGINEERING",
-      description: "Building larger, cleaner systems.",
+      description: "Building larger systems instead of isolated projects.",
       tag: "SYSTEMS",
       progress: 85
     },
     {
       number: "04",
       title: "PRODUCT",
-      description: "Learning how technical products become useful products.",
+      description: "Learning how technical decisions translate into useful products.",
       tag: "PRODUCT",
       progress: 80
     }
   ] as NowFocus[],
 
-  personality: [
-    {
-      title: "Gaming",
-      subtitle: "Analytical strategy & tactical games",
-      desc: "Fosters rapid decision-making, pattern recognition, and tactical execution under pressure."
-    },
-    {
-      title: "Anime",
-      subtitle: "Complex narratives & visual aesthetics",
-      desc: "Appreciation for detailed worldbuilding, high-concept storytelling, and creative direction."
-    },
-    {
-      title: "Gym",
-      subtitle: "Progressive overload & physical discipline",
-      desc: "Building consistency, mental resilience, and long-term goal tracking through physical training."
-    },
-    {
-      title: "Coding & AI Labs",
-      subtitle: "Experimentation beyond class",
-      desc: "Tinkering with emerging AI models, UI micro-interactions, and building side projects for fun."
-    }
-  ],
-
   buildLogData: {
-    latestProject: { name: "SalesMindAI", desc: "AI-powered CRM platform" },
+    date: "AUG 2026",
+    latestProject: { name: "SalesMindAI", desc: "AI-powered CRM platform", status: "active" },
     currentExperiment: { name: "RAG-based AI assistant", desc: "with document memory" },
     currentlyLearning: { name: "Advanced ML & System Design", desc: "" },
     latestRepository: { name: "github.com/sohham-choudhary/salesmindai", url: "https://github.com/Sohham01/SalesMindAI" },

@@ -15,7 +15,7 @@ export function ProjectShowcase() {
             <div className="flex items-center gap-3 font-mono text-[11px] text-accent tracking-wider uppercase mb-3">
               <span className="text-[#6B7280] font-semibold">01</span>
               <span className="text-[#374151]">/</span>
-              <span className="tracking-widest">SELECTED WORK</span>
+              <span className="tracking-widest">FEATURED PROJECT</span>
             </div>
 
             <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.02em] text-[#F3F4F6] font-sans uppercase">
@@ -39,34 +39,31 @@ export function ProjectShowcase() {
         </div>
 
         {featuredProject && (
-          <ProjectCard project={featuredProject} isFeatured={true} />
+          <ProjectCard project={featuredProject} />
         )}
 
-        <div className="mt-4">
+        <div className="mt-8">
           {secondaryProjects.map((project, idx) => (
             <a
               key={project.id}
               href={project.githubUrl}
               target="_blank"
               rel="noreferrer"
-              className="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 py-5 sm:py-6 border-b border-white/[0.04] hover:border-white/[0.08] transition-colors"
+              className="group flex items-center gap-5 sm:gap-8 py-5 sm:py-6 border-b border-white/[0.04] hover:border-white/[0.08] hover:pl-3 transition-all duration-200"
             >
-              <div className="flex items-center gap-5 sm:gap-8">
-                <span className="font-mono text-sm font-semibold text-[#4B5563] group-hover:text-accent transition-colors w-8">
-                  {project.number}
-                </span>
+              <span className="font-mono text-sm font-semibold text-[#4B5563] group-hover:text-accent transition-colors w-8 shrink-0">
+                {project.number}
+              </span>
 
-                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-                  <h3 className="text-base sm:text-lg font-semibold text-[#F3F4F6] font-sans tracking-tight group-hover:text-accent transition-colors">
-                    {project.title}
-                  </h3>
-                  <span className="font-mono text-[11px] text-[#6B7280] tracking-wider uppercase">
-                    {project.category}
-                  </span>
-                </div>
-              </div>
+              <h3 className="text-base sm:text-lg font-semibold text-[#F3F4F6] font-sans tracking-tight group-hover:text-accent transition-colors flex-1">
+                {project.title}
+              </h3>
 
-              <ArrowUpRight className="w-4 h-4 text-[#4B5563] group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0 hidden sm:block" />
+              <span className="font-mono text-[11px] text-[#6B7280] tracking-wider uppercase hidden sm:block">
+                {project.category}
+              </span>
+
+              <ArrowUpRight className="w-4 h-4 text-[#4B5563] group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0" />
             </a>
           ))}
         </div>

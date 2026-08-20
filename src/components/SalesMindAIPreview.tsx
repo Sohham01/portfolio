@@ -27,10 +27,7 @@ export function SalesMindAIPreview() {
         </div>
 
         <div className="flex items-center gap-1.5 px-2 py-0.5 bg-[#12151A] border border-white/[0.04] text-[10px] text-[#9CA3AF]">
-          <span className="text-[#4B5563] uppercase text-[9px]">DEMO:</span>
-          <span className="font-semibold text-accent">demo</span>
-          <span className="text-[#374151]">/</span>
-          <span className="font-semibold text-accent">Demo1234!</span>
+          <span className="text-[#4B5563] uppercase text-[9px]">PREVIEW</span>
         </div>
       </div>
 
@@ -69,26 +66,29 @@ export function SalesMindAIPreview() {
         </div>
 
         <div className="flex-1 p-3 sm:p-4 bg-[#08090B] flex flex-col justify-between overflow-x-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mb-3 font-mono">
-            <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
-              <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">Total Customers</span>
-              <span className="text-sm sm:text-base font-bold text-[#F3F4F6] mt-0.5 block">2,431</span>
-            </div>
+          <div className="flex items-center justify-between mb-2">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 font-mono">
+              <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
+                <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">Total Customers</span>
+                <span className="text-sm sm:text-base font-bold text-[#F3F4F6] mt-0.5 block">2,431</span>
+              </div>
 
-            <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
-              <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">Pipeline Value</span>
-              <span className="text-sm sm:text-base font-bold text-accent mt-0.5 block">$1.29M</span>
-            </div>
+              <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
+                <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">Pipeline Value</span>
+                <span className="text-sm sm:text-base font-bold text-accent mt-0.5 block">$1.29M</span>
+              </div>
 
-            <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
-              <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">Conversion Rate</span>
-              <span className="text-sm sm:text-base font-bold text-emerald-400 mt-0.5 block">51.3%</span>
-            </div>
+              <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
+                <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">Conversion Rate</span>
+                <span className="text-sm sm:text-base font-bold text-emerald-400 mt-0.5 block">51.3%</span>
+              </div>
 
-            <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
-              <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">AI Suggestions</span>
-              <span className="text-sm sm:text-base font-bold text-[#A78BFA] mt-0.5 block">1,203</span>
+              <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
+                <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">AI Suggestions</span>
+                <span className="text-sm sm:text-base font-bold text-[#A78BFA] mt-0.5 block">1,203</span>
+              </div>
             </div>
+            <span className="font-mono text-[8px] text-[#2D3748] uppercase tracking-widest shrink-0 ml-3 hidden lg:block">Demo Data</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-2 flex-1 items-stretch">

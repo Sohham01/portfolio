@@ -7,7 +7,7 @@ export function Contact() {
       id="contact"
       className="py-24 sm:py-36 relative overflow-hidden section-divider"
     >
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-accent/[0.06] rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[200px] h-[200px] bg-accent/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10 text-left">
 
@@ -17,7 +17,7 @@ export function Contact() {
           <span className="tracking-widest">CONTACT</span>
         </div>
 
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.02em] text-[#F3F4F6] uppercase font-sans leading-[1.08] break-words max-w-3xl">
+        <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.02em] text-[#F3F4F6] uppercase font-sans leading-[1.1] break-words max-w-3xl">
           HAVE SOMETHING<br />
           WORTH BUILDING?
         </h2>

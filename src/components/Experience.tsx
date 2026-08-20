@@ -9,8 +9,8 @@ export function Experience() {
         <span className="tracking-widest">EXPERIENCE</span>
       </div>
 
-      <h2 className="text-2xl sm:text-4xl font-bold tracking-[-0.02em] text-[#F3F4F6] font-sans uppercase mb-6">
-        EXPERIENCE
+      <h2 className="text-2xl sm:text-4xl font-bold tracking-[-0.02em] text-[#F3F4F6] font-sans uppercase mb-8">
+        WHERE I&apos;VE WORKED.
       </h2>
 
       <div className="space-y-0">
@@ -19,12 +19,12 @@ export function Experience() {
             key={idx}
             className="py-5 border-b border-white/[0.04] last:border-b-0"
           >
-            <div className="flex items-start justify-between gap-4 mb-2">
+            <div className="flex items-start justify-between gap-4 mb-1">
               <span className="font-sans font-semibold text-[#F3F4F6] text-sm sm:text-base">{item.role}</span>
               <span className="text-[#4B5563] text-[11px] font-mono shrink-0">{item.period}</span>
             </div>
-            <div className="font-mono text-[11px] text-[#4B5563] mb-2">{item.organization}</div>
-            <p className="text-xs sm:text-sm text-[#6B7280] font-sans leading-relaxed">
+            <div className="font-mono text-[11px] text-accent mb-3">{item.organization}</div>
+            <p className="text-[13px] text-[#6B7280] font-sans leading-relaxed">
               {item.description}
             </p>
           </div>

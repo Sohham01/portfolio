@@ -92,9 +92,10 @@ export default function SalesMindAICaseStudy() {
               </a>
             </div>
 
-            <div className="mt-4 p-3 bg-emerald-500/[0.06] border border-emerald-500/20 flex items-center justify-between font-mono text-[11px]">
-              <span className="text-emerald-400 font-semibold text-[10px] uppercase">DEMO CREDENTIALS:</span>
-              <span className="text-[#D1D5DB]"><strong className="text-accent">demo</strong> / <strong className="text-accent">Demo1234!</strong></span>
+            <div className="mt-4 flex items-center gap-2 font-mono text-[10px] text-[#4B5563]">
+              <span className="uppercase tracking-wider">Demo access available</span>
+              <span className="text-[#2D3748]">—</span>
+              <span>contact for credentials</span>
             </div>
           </div>
 

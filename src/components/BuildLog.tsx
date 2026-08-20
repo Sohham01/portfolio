@@ -23,13 +23,25 @@ export function BuildLog() {
           <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.02em] text-[#F3F4F6] font-sans uppercase">
             ALWAYS BUILDING SOMETHING.
           </h2>
+
+          <div className="mt-3 font-mono text-[10px] text-[#4B5563] uppercase tracking-widest">
+            {buildLogData.date}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
 
           <div className="lg:col-span-5 space-y-5 font-mono text-[11px]">
-            <div className="pb-4 border-b border-white/[0.04]">
-              <span className="text-[#4B5563] block mb-1.5 font-semibold uppercase tracking-wider text-[10px]">Latest Project</span>
+            <div className="pb-5 border-b border-white/[0.04]">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[#4B5563] font-semibold uppercase tracking-wider text-[10px]">Building</span>
+                {buildLogData.latestProject.status === "active" && (
+                  <span className="flex items-center gap-1.5 text-emerald-400 text-[10px] font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    ACTIVE
+                  </span>
+                )}
+              </div>
               <span className="text-[#F3F4F6] font-semibold text-sm font-sans block">
                 {buildLogData.latestProject.name}
               </span>
@@ -38,8 +50,8 @@ export function BuildLog() {
               </span>
             </div>
 
-            <div className="pb-4 border-b border-white/[0.04]">
-              <span className="text-[#4B5563] block mb-1.5 font-semibold uppercase tracking-wider text-[10px]">Current Experiment</span>
+            <div className="pb-5 border-b border-white/[0.04]">
+              <span className="text-[#4B5563] block mb-2 font-semibold uppercase tracking-wider text-[10px]">Experimenting</span>
               <span className="text-[#F3F4F6] font-semibold text-sm font-sans block">
                 {buildLogData.currentExperiment.name}
               </span>
@@ -48,15 +60,15 @@ export function BuildLog() {
               </span>
             </div>
 
-            <div className="pb-4 border-b border-white/[0.04]">
-              <span className="text-[#4B5563] block mb-1.5 font-semibold uppercase tracking-wider text-[10px]">Currently Learning</span>
+            <div className="pb-5 border-b border-white/[0.04]">
+              <span className="text-[#4B5563] block mb-2 font-semibold uppercase tracking-wider text-[10px]">Learning</span>
               <span className="text-[#F3F4F6] font-semibold text-sm font-sans block">
                 {buildLogData.currentlyLearning.name}
               </span>
             </div>
 
             <div>
-              <span className="text-[#4B5563] block mb-1.5 font-semibold uppercase tracking-wider text-[10px]">Latest Repository</span>
+              <span className="text-[#4B5563] block mb-2 font-semibold uppercase tracking-wider text-[10px]">Latest Repository</span>
               <a
                 href={buildLogData.latestRepository.url}
                 target="_blank"
