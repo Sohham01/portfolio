@@ -263,6 +263,6 @@ export const PORTFOLIO_DATA = {
     currentlyLearning: { name: "Advanced ML & System Design", desc: "" },
     latestRepository: { name: "github.com/sohham-choudhary/salesmindai", url: "https://github.com/Sohham01/SalesMindAI" },
     totalContributions: 300,
-    year: 2025
+    year: 2026
   }
 };
