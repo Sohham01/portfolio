@@ -1,13 +1,110 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { ArrowRight } from "lucide-react";
+import type { GithubWeek } from "@/types/github";
+
+const staticData = PORTFOLIO_DATA.buildLogData;
+const GITHUB_PROFILE_URL = PORTFOLIO_DATA.personal.socials.github;
+
+const MONTHS = [
+  "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+  "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+];
+
+const LEVEL_CLASS: Record<number, string> = {
+  0: "bg-[#12151A]",
+  1: "bg-emerald-950/70",
+  2: "bg-emerald-800/50",
+  3: "bg-emerald-600/70",
+  4: "bg-emerald-400/80",
+};
+
+function fallbackGrid(): { level: number; days: number }[] {
+  return Array.from({ length: 48 }, (_, i) => {
+    const level = (i * 7 + 3) % 5;
+    return { level, days: 0 };
+  });
+}
+
+function weekMonthLabel(week: GithubWeek): string {
+  if (!week.days.length) return "";
+  return MONTHS[new Date(week.days[0].date).getMonth()];
+}
 
 export function BuildLog() {
-  const { buildLogData } = PORTFOLIO_DATA;
+  const [live, setLive] = useState<{
+    date: string;
+    year: number;
+    totalContributions: number;
+    weeks: GithubWeek[];
+    latestRepository: { name: string; desc: string; url: string } | null;
+  } | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  const contributionGrid = Array.from({ length: 48 }, (_, i) => {
-    const level = (i * 7 + 3) % 5;
-    return level;
-  });
+  useEffect(() => {
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const res = await fetch("/api/github", { next: { revalidate: 300 } });
+        const data = await res.json();
+        if (cancelled) return;
+
+        if (!res.ok || data.error) {
+          setError(true);
+          setLoading(false);
+          return;
+        }
+
+        setLive({
+          date: data.date,
+          year: data.year,
+          totalContributions: data.totalContributions,
+          weeks: data.weeks,
+          latestRepository: data.latestRepository,
+        });
+        setError(false);
+        setLoading(false);
+      } catch {
+        if (cancelled) return;
+        setError(true);
+        setLoading(false);
+      }
+    }
+
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const date = live?.date ?? staticData.date;
+  const year = live?.year ?? staticData.year;
+  const totalContributions = live?.totalContributions ?? staticData.totalContributions;
+  const latestRepository = live?.latestRepository ?? {
+    name: staticData.latestRepository.name,
+    desc: "",
+    url: staticData.latestRepository.url,
+  };
+
+  const weeks = live?.weeks ?? [];
+  const contributionGrid = live?.weeks.length
+    ? null
+    : fallbackGrid();
+
+  const monthLabels = useCallback(() => {
+    if (!weeks.length) return [];
+    const labels: { index: number; label: string }[] = [];
+    weeks.forEach((week, i) => {
+      const label = weekMonthLabel(week);
+      const prev = i > 0 ? weekMonthLabel(weeks[i - 1]) : null;
+      if (label && label !== prev) labels.push({ index: i, label });
+    });
+    return labels;
+  }, [weeks]);
 
   return (
     <section className="py-20 sm:py-28 relative section-divider bg-[#0D0F12]">
@@ -25,7 +122,7 @@ export function BuildLog() {
           </h2>
 
           <div className="mt-3 font-mono text-[10px] text-[#4B5563] uppercase tracking-widest">
-            {buildLogData.date}
+            {date}
           </div>
         </div>
 
@@ -35,7 +132,7 @@ export function BuildLog() {
             <div className="pb-5 border-b border-white/[0.04]">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-[#4B5563] font-semibold uppercase tracking-wider text-[10px]">Building</span>
-                {buildLogData.latestProject.status === "active" && (
+                {staticData.latestProject.status === "active" && (
                   <span className="flex items-center gap-1.5 text-emerald-400 text-[10px] font-semibold">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                     ACTIVE
@@ -43,39 +140,39 @@ export function BuildLog() {
                 )}
               </div>
               <span className="text-[#F3F4F6] font-semibold text-sm font-sans block">
-                {buildLogData.latestProject.name}
+                {staticData.latestProject.name}
               </span>
               <span className="text-[#6B7280] text-xs font-sans">
-                {buildLogData.latestProject.desc}
+                {staticData.latestProject.desc}
               </span>
             </div>
 
             <div className="pb-5 border-b border-white/[0.04]">
               <span className="text-[#4B5563] block mb-2 font-semibold uppercase tracking-wider text-[10px]">Experimenting</span>
               <span className="text-[#F3F4F6] font-semibold text-sm font-sans block">
-                {buildLogData.currentExperiment.name}
+                {staticData.currentExperiment.name}
               </span>
               <span className="text-[#6B7280] text-xs font-sans">
-                {buildLogData.currentExperiment.desc}
+                {staticData.currentExperiment.desc}
               </span>
             </div>
 
             <div className="pb-5 border-b border-white/[0.04]">
               <span className="text-[#4B5563] block mb-2 font-semibold uppercase tracking-wider text-[10px]">Learning</span>
               <span className="text-[#F3F4F6] font-semibold text-sm font-sans block">
-                {buildLogData.currentlyLearning.name}
+                {staticData.currentlyLearning.name}
               </span>
             </div>
 
             <div>
               <span className="text-[#4B5563] block mb-2 font-semibold uppercase tracking-wider text-[10px]">Latest Repository</span>
               <a
-                href={buildLogData.latestRepository.url}
+                href={latestRepository.url}
                 target="_blank"
                 rel="noreferrer"
                 className="text-accent hover:text-accent-light font-mono text-xs break-all inline-block transition-colors"
               >
-                {buildLogData.latestRepository.name}
+                {latestRepository.name}
               </a>
             </div>
           </div>
@@ -84,46 +181,80 @@ export function BuildLog() {
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-white/[0.06] font-mono text-[11px] mb-4">
                 <span className="text-[#D1D5DB] font-semibold uppercase tracking-wider">Contributions</span>
-                <span className="text-[#4B5563]">{buildLogData.year}</span>
+                <span className="text-[#4B5563]">{year}</span>
               </div>
 
-              <div className="flex items-center justify-between font-mono text-[9px] text-[#4B5563] mb-2 px-1">
-                <span>Jan</span>
-                <span>Feb</span>
-                <span>Mar</span>
-                <span>Apr</span>
-                <span>May</span>
-                <span>Jun</span>
-              </div>
+              {loading ? (
+                <div className="h-28 flex items-center justify-center">
+                  <span className="font-mono text-[10px] text-[#4B5563] uppercase tracking-widest animate-pulse">
+                    Syncing with GitHub…
+                  </span>
+                </div>
+              ) : contributionGrid ? (
+                <>
+                  <div className="flex items-center justify-between font-mono text-[9px] text-[#4B5563] mb-2 px-1">
+                    <span>Jan</span>
+                    <span>Feb</span>
+                    <span>Mar</span>
+                    <span>Apr</span>
+                    <span>May</span>
+                    <span>Jun</span>
+                  </div>
 
-              <div className="grid grid-cols-12 gap-1 py-1">
-                {contributionGrid.map((lvl, idx) => (
-                  <div
-                    key={idx}
-                    className={`h-3.5 ${
-                      lvl === 4
-                        ? "bg-emerald-400/80"
-                        : lvl === 3
-                        ? "bg-emerald-600/70"
-                        : lvl === 2
-                        ? "bg-emerald-800/50"
-                        : lvl === 1
-                        ? "bg-emerald-950/60"
-                        : "bg-[#12151A]"
-                    }`}
-                  />
-                ))}
-              </div>
+                  <div className="grid grid-cols-12 gap-1 py-1">
+                    {contributionGrid.map(({ level }, idx) => (
+                      <div
+                        key={idx}
+                        className={`h-3.5 ${LEVEL_CLASS[level]}`}
+                      />
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="relative font-mono text-[9px] text-[#4B5563] mb-2 h-3">
+                    {monthLabels().map(({ index, label }) => (
+                      <span
+                        key={index}
+                        className="absolute top-0"
+                        style={{ left: `${(index / weeks.length) * 100}%` }}
+                      >
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-[3px] overflow-x-auto pb-1">
+                    {weeks.map((week, wi) => (
+                      <div key={wi} className="flex flex-col gap-[3px]">
+                        {week.days.map((day, di) => (
+                          <div
+                            key={di}
+                            title={`${day.date}: ${day.count} contribution${day.count === 1 ? "" : "s"}`}
+                            className={`h-[10px] w-[10px] sm:h-[12px] sm:w-[12px] rounded-[2px] ${LEVEL_CLASS[day.level]}`}
+                          />
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+
+                  {error && (
+                    <div className="mt-2 font-mono text-[9px] text-[#6B7280] uppercase tracking-wider">
+                      Showing cached GitHub data
+                    </div>
+                  )}
+                </>
+              )}
             </div>
 
             <div className="mt-5 pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-[11px]">
               <div>
                 <span className="text-[#4B5563] text-[10px] uppercase block">Total contributions</span>
-                <span className="text-base font-bold text-[#F3F4F6]">{buildLogData.totalContributions.toLocaleString()}</span>
+                <span className="text-base font-bold text-[#F3F4F6]">{totalContributions.toLocaleString()}</span>
               </div>
 
               <a
-                href={PORTFOLIO_DATA.personal.socials.github}
+                href={GITHUB_PROFILE_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="touch-target px-4 py-2 border border-white/[0.06] hover:border-white/10 text-[#D1D5DB] hover:text-white transition-all font-mono text-[11px] flex items-center gap-2"
