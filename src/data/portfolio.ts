@@ -24,7 +24,6 @@ export interface NowFocus {
   title: string;
   description: string;
   tag: string;
-  progress: number;
 }
 
 export interface ExperienceItem {
@@ -65,7 +64,7 @@ export const PORTFOLIO_DATA = {
       available: true
     },
     currentState: {
-      building: "SalesMindAI",
+      building: "Product experiments",
       learning: "DSA + ML",
       exploring: "Product Engineering",
       status: "ONLINE"
@@ -230,29 +229,25 @@ export const PORTFOLIO_DATA = {
       number: "01",
       title: "DSA",
       description: "Building stronger problem-solving fundamentals through consistent algorithm practice.",
-      tag: "CORE",
-      progress: 88
+      tag: "CORE"
     },
     {
       number: "02",
       title: "MACHINE LEARNING",
       description: "Moving beyond introductory models and developing a deeper understanding of ML systems.",
-      tag: "AI",
-      progress: 82
+      tag: "AI"
     },
     {
       number: "03",
       title: "SOFTWARE ENGINEERING",
       description: "Building larger systems instead of isolated projects.",
-      tag: "SYSTEMS",
-      progress: 85
+      tag: "SYSTEMS"
     },
     {
       number: "04",
       title: "PRODUCT",
       description: "Learning how technical decisions translate into useful products.",
-      tag: "PRODUCT",
-      progress: 80
+      tag: "PRODUCT"
     }
   ] as NowFocus[],
 

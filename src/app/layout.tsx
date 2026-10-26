@@ -15,9 +15,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sohham Choudhary — Data Science × AI × Software",
+  title: "Sohham Choudhary — Building useful intelligence",
   description:
-    "Personal portfolio of Sohham Choudhary, a Data Science & AI student at IIM Sambalpur building software, data and AI-powered products.",
+    "The portfolio of Sohham Choudhary: a Data Science & AI student building useful products with data, software and thoughtful systems.",
   keywords: [
     "Sohham Choudhary",
     "Data Science",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Sohham Choudhary" }],
   openGraph: {
-    title: "Sohham Choudhary — Data Science × AI × Software",
+    title: "Sohham Choudhary — Building useful intelligence",
     description:
-      "Personal portfolio of Sohham Choudhary, a Data Science & AI student at IIM Sambalpur building software, data and AI-powered products.",
+      "A portfolio of experiments, products and analytical tools built with data, AI and software.",
     type: "website",
     locale: "en_US",
     siteName: "Sohham Choudhary Portfolio",
@@ -47,8 +47,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} dark scroll-smooth`}>
-      <body className="bg-[#08090B] text-[#F3F4F6] antialiased font-sans selection:bg-accent/35 selection:text-white">
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>
