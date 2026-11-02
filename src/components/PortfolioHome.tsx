@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+  type PointerEvent,
+} from "react";
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -13,7 +19,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { PORTFOLIO_DATA } from "@/data/portfolio";
+import { PORTFOLIO_DATA, type ProjectTrack } from "@/data/portfolio";
 
 const navItems = [
   { label: "Work", href: "#work" },
@@ -45,6 +51,14 @@ const practiceAreas = [
   },
 ] as const;
 
+const projectFilters: Array<{ id: "all" | ProjectTrack; label: string }> = [
+  { id: "all", label: "All work" },
+  { id: "ai", label: "AI / ML" },
+  { id: "software", label: "Software" },
+  { id: "data", label: "Data & analytics" },
+  { id: "product", label: "Product" },
+];
+
 type FieldPoint = {
   x: number;
   y: number;
@@ -70,7 +84,9 @@ function SignalField({ activeArea }: { activeArea: string }) {
     const context = canvas.getContext("2d");
     if (!context) return;
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reducedMotion =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      window.matchMedia("(pointer: coarse)").matches;
     const pointer = { x: 0.68, y: 0.42, active: false };
     const points: FieldPoint[] = [];
     let width = 0;
@@ -256,9 +272,14 @@ export function PortfolioHome() {
   const shellRef = useRef<HTMLDivElement>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeArea, setActiveArea] = useState("data");
+  const [projectFilter, setProjectFilter] = useState<"all" | ProjectTrack>("all");
   const [scrollProgress, setScrollProgress] = useState(0);
-  const featuredProject = PORTFOLIO_DATA.projects.find((project) => project.featured);
-  const secondaryProjects = PORTFOLIO_DATA.projects.filter((project) => !project.featured);
+  const [resumeTransitionOpen, setResumeTransitionOpen] = useState(false);
+  const filteredProjects = PORTFOLIO_DATA.projects.filter(
+    (project) => projectFilter === "all" || project.tracks?.includes(projectFilter),
+  );
+  const filteredFeaturedProject = filteredProjects.find((project) => project.featured);
+  const secondaryProjects = filteredProjects.filter((project) => !project.featured);
   const { personal } = PORTFOLIO_DATA;
   const selectedArea = practiceAreas.find((area) => area.id === activeArea) ?? practiceAreas[0];
 
@@ -325,6 +346,21 @@ export function PortfolioHome() {
     shellRef.current?.classList.remove("pointer-active");
   };
 
+  const openResume = () => {
+    window.location.assign("/resume.pdf");
+  };
+
+  const startResumeTransition = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      openResume();
+      return;
+    }
+
+    setResumeTransitionOpen(true);
+  };
+
   return (
     <div
       ref={shellRef}
@@ -339,6 +375,26 @@ export function PortfolioHome() {
         aria-hidden="true"
         style={{ transform: `scaleX(${scrollProgress})` }}
       />
+
+      {resumeTransitionOpen && (
+        <div className="resume-transition" role="dialog" aria-modal="true" aria-label="Opening resume">
+          <video
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            src="/resume-transition.mp4"
+            onEnded={openResume}
+            onError={openResume}
+          />
+          <div className="resume-transition-caption">
+            <span>Opening resume</span>
+            <button type="button" onClick={openResume}>
+              Skip <ArrowUpRight size={14} />
+            </button>
+          </div>
+        </div>
+      )}
 
       <header className="site-header">
         <div className="page-frame header-inner">
@@ -406,21 +462,27 @@ export function PortfolioHome() {
               </div>
 
               <h1 className="hero-title" data-reveal data-reveal-delay="80">
-                I build
-                <br className="hero-mobile-break" /> <em>data products</em>
+                I build with
                 <br />
-                and software.
+                <em>Data, AI</em> &amp; Software.
               </h1>
 
               <p className="hero-lede">
-                {personal.bio} I turn messy questions into useful interfaces, analytical tools and
-                dependable systems.
+                {personal.bio} I enjoy turning messy questions into useful interfaces, analytical
+                tools and dependable systems.
               </p>
 
               <div className="hero-actions">
                 <a className="button button-dark" href="#work">
                   See selected work
                   <ArrowDownRight size={17} />
+                </a>
+                <a
+                  className="text-link"
+                  href="/resume.pdf"
+                  onClick={startResumeTransition}
+                >
+                  View resume <ArrowUpRight size={15} />
                 </a>
                 <a className="text-link" href={`mailto:${personal.socials.email}`}>
                   Start a conversation <ArrowUpRight size={15} />
@@ -526,33 +588,69 @@ export function PortfolioHome() {
               description="A small collection of experiments, products and analytical tools built to make complicated things easier to act on."
             />
 
-            {featuredProject && (
+            <div className="project-filters" role="tablist" aria-label="Filter selected work">
+              {projectFilters.map((filter) => (
+                <button
+                  key={filter.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={projectFilter === filter.id}
+                  className={projectFilter === filter.id ? "is-active" : ""}
+                  onClick={() => setProjectFilter(filter.id)}
+                >
+                  {filter.label}
+                </button>
+              ))}
+            </div>
+
+            {filteredFeaturedProject && (
               <article className="featured-project" data-reveal data-reveal-delay="120">
                 <div className="featured-project-topline">
                   <span>01 / Featured system</span>
-                  <span>{featuredProject.category}</span>
+                  <span>{filteredFeaturedProject.category}</span>
                 </div>
 
                 <div className="featured-project-grid">
                   <div className="featured-project-copy">
                     <div className="project-status-pill">
                       <span className="status-dot" aria-hidden="true" />
-                      Live build
+                      {filteredFeaturedProject.status === "in-progress" ? "In progress" : "Live build"}
                     </div>
-                    <h3>{featuredProject.title}</h3>
-                    <p className="featured-project-tagline">{featuredProject.tagline}</p>
-                    <p className="featured-project-description">{featuredProject.description}</p>
+                    <h3>{filteredFeaturedProject.title}</h3>
+                    <p className="featured-project-tagline">{filteredFeaturedProject.tagline}</p>
+                    <p className="featured-project-description">{filteredFeaturedProject.description}</p>
+
+                    <div className="project-evidence">
+                      {filteredFeaturedProject.problem && (
+                        <div>
+                          <span>Problem</span>
+                          <p>{filteredFeaturedProject.problem}</p>
+                        </div>
+                      )}
+                      {filteredFeaturedProject.contribution && (
+                        <div>
+                          <span>Contribution</span>
+                          <p>{filteredFeaturedProject.contribution}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="project-tech-list" aria-label="Technologies used">
+                      {filteredFeaturedProject.tech.map((tech) => (
+                        <span key={tech}>{tech}</span>
+                      ))}
+                    </div>
 
                     <div className="project-actions">
-                      {featuredProject.caseStudyUrl && (
-                        <a className="button button-acid" href={featuredProject.caseStudyUrl}>
+                      {filteredFeaturedProject.caseStudyUrl && (
+                        <a className="button button-acid" href={filteredFeaturedProject.caseStudyUrl}>
                           Read the case study <ArrowUpRight size={16} />
                         </a>
                       )}
-                      {featuredProject.githubUrl && (
+                      {filteredFeaturedProject.githubUrl && (
                         <a
                           className="project-text-link"
-                          href={featuredProject.githubUrl}
+                          href={filteredFeaturedProject.githubUrl}
                           target="_blank"
                           rel="noreferrer"
                         >
@@ -562,7 +660,7 @@ export function PortfolioHome() {
                     </div>
 
                     <div className="project-metrics">
-                      {featuredProject.metrics?.slice(0, 3).map((metric) => (
+                      {filteredFeaturedProject.metrics?.slice(0, 3).map((metric) => (
                         <div key={metric.label}>
                           <span>{metric.label}</span>
                           <strong>{metric.value}</strong>
@@ -571,7 +669,7 @@ export function PortfolioHome() {
                     </div>
                   </div>
 
-                  <div className="project-visual" aria-label="SalesMindAI system flow">
+                  <div className="project-visual" role="img" aria-label="SalesMindAI system flow">
                     <div className="project-visual-header">
                       <span>Sales intelligence / 001</span>
                       <span className="visual-live">● live</span>
@@ -603,28 +701,61 @@ export function PortfolioHome() {
 
             <div className="project-list-label">
               <span>More work</span>
-              <span>Open the repo ↗</span>
+              <span>{secondaryProjects.length} projects shown</span>
             </div>
 
             <div className="project-list" data-reveal data-reveal-delay="180">
               {secondaryProjects.map((project) => {
-                const href = project.githubUrl ?? project.caseStudyUrl ?? "#contact";
+                const primaryUrl = project.demoUrl ?? project.githubUrl ?? project.caseStudyUrl;
+
                 return (
-                  <a
-                    className="project-row"
-                    href={href}
+                  <div
+                    className={`project-row${project.status === "in-progress" ? " project-row-static" : ""}`}
                     key={project.id}
-                    target={project.githubUrl ? "_blank" : undefined}
-                    rel={project.githubUrl ? "noreferrer" : undefined}
                   >
                     <span className="project-row-number">{project.number}</span>
                     <span className="project-row-main">
-                      <strong>{project.title}</strong>
+                      {primaryUrl ? (
+                        <a
+                          className="project-row-title"
+                          href={primaryUrl}
+                          target={primaryUrl.startsWith("http") ? "_blank" : undefined}
+                          rel={primaryUrl.startsWith("http") ? "noreferrer" : undefined}
+                        >
+                          {project.title}
+                        </a>
+                      ) : (
+                        <strong>{project.title}</strong>
+                      )}
                       <small>{project.tagline}</small>
+                      <p>{project.description}</p>
+                      {project.contribution && (
+                        <span className="project-row-contribution">{project.contribution}</span>
+                      )}
+                      {project.highlight && (
+                        <span className="project-row-highlight">{project.highlight}</span>
+                      )}
+                      {project.tech.length > 0 && (
+                        <span className="project-row-tech">{project.tech.join(" · ")}</span>
+                      )}
                     </span>
-                    <span className="project-row-category">{project.category}</span>
+                    <span className="project-row-category">
+                      <span>{project.status === "in-progress" ? "IN PROGRESS" : project.category}</span>
+                      <span className="project-row-links">
+                        {project.demoUrl && (
+                          <a href={project.demoUrl} target="_blank" rel="noreferrer">
+                            Demo
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                            Repo
+                          </a>
+                        )}
+                      </span>
+                    </span>
                     <ArrowUpRight className="project-row-arrow" size={19} />
-                  </a>
+                  </div>
                 );
               })}
             </div>
@@ -718,7 +849,7 @@ export function PortfolioHome() {
                 </div>
 
                 <div className="now-card-footer">
-                  <span>Updated August 2026</span>
+                  <span>Current snapshot</span>
                   <span>01 / 03</span>
                 </div>
               </div>
@@ -834,6 +965,9 @@ export function PortfolioHome() {
                   </a>
                   <a href={personal.socials.linkedin} target="_blank" rel="noreferrer">
                     <Linkedin size={16} /> LinkedIn
+                  </a>
+                  <a href="/resume.pdf" download="Sohham-Choudhary-Resume.pdf">
+                    <ArrowUpRight size={16} /> Download resume
                   </a>
                   <a href={`mailto:${personal.socials.email}`}>
                     <Mail size={16} /> {personal.socials.email}

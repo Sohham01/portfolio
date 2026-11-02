@@ -57,6 +57,16 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
       },
     },
     {
+      id: "resume",
+      label: "View Resume",
+      category: "Document",
+      icon: FileText,
+      action: () => {
+        onClose();
+        window.open("/resume.pdf", "_blank", "noopener,noreferrer");
+      },
+    },
+    {
       id: "about",
       label: "Go to About Section",
       category: "Navigation",
@@ -70,14 +80,14 @@ export function CommandMenu({ isOpen, onClose }: CommandMenuProps) {
     },
     {
       id: "skills",
-      label: "Go to Technical Toolbox",
+        label: "Go to Technical Toolbox",
       category: "Navigation",
       icon: Wrench,
       action: () => {
         onClose();
-        const el = document.querySelector("#skills");
+        const el = document.querySelector("#toolbox");
         if (el) el.scrollIntoView({ behavior: "smooth" });
-        else router.push("/#skills");
+        else router.push("/#toolbox");
       },
     },
     {

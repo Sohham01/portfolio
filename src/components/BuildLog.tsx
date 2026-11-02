@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { ArrowRight } from "lucide-react";
 import type { GithubWeek } from "@/types/github";
@@ -90,7 +90,7 @@ export function BuildLog() {
     url: staticData.latestRepository.url,
   };
 
-  const weeks = live?.weeks ?? [];
+  const weeks = useMemo(() => live?.weeks ?? [], [live?.weeks]);
   const contributionGrid = live?.weeks.length
     ? null
     : fallbackGrid();

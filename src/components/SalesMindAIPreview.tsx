@@ -2,190 +2,172 @@
 
 import { useState } from "react";
 import {
-  LayoutDashboard,
-  Users,
+  Activity,
   BarChart3,
+  LayoutDashboard,
   Settings,
   Sparkles,
   TrendingUp,
-  Activity,
+  Users,
 } from "lucide-react";
 
 export function SalesMindAIPreview() {
   const [activeView, setActiveView] = useState<"dashboard" | "copilot">("dashboard");
 
   return (
-    <div className="w-full bg-[#08090B] border border-white/[0.08] overflow-hidden font-sans text-[#F3F4F6]">
-      <div className="px-3 sm:px-4 py-2 bg-[#0D0F12] border-b border-white/[0.06] flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] text-[#4B5563]">
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-[#EF4444]/60 inline-block"></span>
-            <span className="w-2 h-2 rounded-full bg-[#EAB308]/60 inline-block"></span>
-            <span className="w-2 h-2 rounded-full bg-emerald-500/60 inline-block"></span>
-          </div>
-          <span className="text-[#374151] text-[10px] ml-1 hidden sm:inline">app.salesmindai.io/dashboard</span>
+    <div className="salesmind-preview">
+      <div className="salesmind-preview-bar">
+        <div className="salesmind-preview-window">
+          <span />
+          <span />
+          <span />
+          <code>app.salesmindai.io/dashboard</code>
         </div>
-
-        <div className="flex items-center gap-1.5 px-2 py-0.5 bg-[#12151A] border border-white/[0.04] text-[10px] text-[#9CA3AF]">
-          <span className="text-[#4B5563] uppercase text-[9px]">PREVIEW</span>
-        </div>
+        <span className="salesmind-preview-label">Preview</span>
       </div>
 
-      <div className="flex min-h-[300px] sm:min-h-[360px]">
-        <div className="w-10 bg-[#0D0F12] border-r border-white/[0.04] flex flex-col items-center py-3 space-y-3 text-[#4B5563] shrink-0">
-          <div className="w-6 h-6 rounded bg-accent flex items-center justify-center text-white font-bold text-[9px] font-mono">
-            S
-          </div>
+      <div className="salesmind-preview-body">
+        <aside className="salesmind-sidebar">
+          <div className="salesmind-mark">S</div>
           <button
+            type="button"
+            className={activeView === "dashboard" ? "is-active" : ""}
             onClick={() => setActiveView("dashboard")}
-            className={`p-1.5 transition-colors ${
-              activeView === "dashboard" ? "text-accent" : "hover:text-[#9CA3AF]"
-            }`}
-            title="Dashboard"
+            aria-label="Show dashboard preview"
           >
-            <LayoutDashboard className="w-3.5 h-3.5" />
+            <LayoutDashboard size={15} />
           </button>
           <button
+            type="button"
+            className={activeView === "copilot" ? "is-active" : ""}
             onClick={() => setActiveView("copilot")}
-            className={`p-1.5 transition-colors ${
-              activeView === "copilot" ? "text-accent" : "hover:text-[#9CA3AF]"
-            }`}
-            title="AI Copilot"
+            aria-label="Show AI copilot preview"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles size={15} />
           </button>
-          <div className="p-1.5 text-[#2D3748]">
-            <Users className="w-3.5 h-3.5" />
-          </div>
-          <div className="p-1.5 text-[#2D3748]">
-            <BarChart3 className="w-3.5 h-3.5" />
-          </div>
-          <div className="p-1.5 text-[#2D3748]">
-            <Settings className="w-3.5 h-3.5" />
-          </div>
-        </div>
+          <span>
+            <Users size={15} />
+          </span>
+          <span>
+            <BarChart3 size={15} />
+          </span>
+          <span>
+            <Settings size={15} />
+          </span>
+        </aside>
 
-        <div className="flex-1 p-3 sm:p-4 bg-[#08090B] flex flex-col justify-between overflow-x-auto">
-          <div className="flex items-center justify-between mb-2">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 font-mono">
-              <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
-                <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">Total Customers</span>
-                <span className="text-sm sm:text-base font-bold text-[#F3F4F6] mt-0.5 block">2,431</span>
+        <div className="salesmind-dashboard">
+          <div className="salesmind-dashboard-heading">
+            <div className="salesmind-metrics">
+              <div>
+                <span>Total customers</span>
+                <strong>2,431</strong>
               </div>
-
-              <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
-                <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">Pipeline Value</span>
-                <span className="text-sm sm:text-base font-bold text-accent mt-0.5 block">$1.29M</span>
+              <div>
+                <span>Pipeline value</span>
+                <strong>$1.29M</strong>
               </div>
-
-              <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
-                <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">Conversion Rate</span>
-                <span className="text-sm sm:text-base font-bold text-emerald-400 mt-0.5 block">51.3%</span>
+              <div>
+                <span>Conversion rate</span>
+                <strong>51.3%</strong>
               </div>
-
-              <div className="p-2.5 bg-[#0D0F12] border border-white/[0.04]">
-                <span className="text-[8px] sm:text-[9px] text-[#4B5563] uppercase tracking-wider block">AI Suggestions</span>
-                <span className="text-sm sm:text-base font-bold text-[#A78BFA] mt-0.5 block">1,203</span>
+              <div>
+                <span>AI suggestions</span>
+                <strong>1,203</strong>
               </div>
             </div>
-            <span className="font-mono text-[8px] text-[#2D3748] uppercase tracking-widest shrink-0 ml-3 hidden lg:block">Demo Data</span>
+            <span className="salesmind-demo-label">Demo data</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-2 flex-1 items-stretch">
-            <div className="md:col-span-8 p-3 bg-[#0D0F12] border border-white/[0.04] flex flex-col justify-between">
-              <div className="flex items-center justify-between pb-2 border-b border-white/[0.04] font-mono text-[9px]">
-                <span className="text-[#D1D5DB] font-semibold uppercase flex items-center gap-1.5">
-                  <TrendingUp className="w-3 h-3 text-accent" />
-                  REVENUE TRENDS
-                </span>
-                <span className="text-emerald-400">+24.8% YOY</span>
-              </div>
+          {activeView === "dashboard" ? (
+            <div className="salesmind-panels">
+              <div className="salesmind-panel salesmind-revenue-panel">
+                <div className="salesmind-panel-heading">
+                  <strong>
+                    <TrendingUp size={13} /> Revenue trends
+                  </strong>
+                  <span>+24.8% yoy</span>
+                </div>
 
-              <div className="h-28 sm:h-32 w-full pt-2 relative">
-                <svg viewBox="0 0 400 120" className="w-full h-full overflow-visible">
-                  <defs>
-                    <linearGradient id="purpleGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.0" />
-                    </linearGradient>
-                  </defs>
+                <div className="salesmind-chart">
+                  <svg viewBox="0 0 400 120" aria-label="Revenue trends chart" role="img">
+                    <defs>
+                      <linearGradient id="salesmind-purple-gradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#d8ff62" stopOpacity="0.22" />
+                        <stop offset="100%" stopColor="#d8ff62" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <line x1="0" y1="30" x2="400" y2="30" />
+                    <line x1="0" y1="70" x2="400" y2="70" />
+                    <path
+                      className="salesmind-chart-fill"
+                      d="M 0 90 Q 60 75, 120 45 T 240 60 T 360 20 L 400 15 L 400 120 L 0 120 Z"
+                    />
+                    <path
+                      className="salesmind-chart-line"
+                      d="M 0 90 Q 60 75, 120 45 T 240 60 T 360 20 L 400 15"
+                    />
+                    <circle cx="120" cy="45" r="3" />
+                    <circle cx="240" cy="60" r="3" />
+                    <circle cx="400" cy="15" r="3.5" />
+                  </svg>
+                </div>
 
-                  <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,0.03)" strokeDasharray="3 3" />
-                  <line x1="0" y1="70" x2="400" y2="70" stroke="rgba(255,255,255,0.03)" strokeDasharray="3 3" />
-
-                  <path
-                    d="M 0 90 Q 60 75, 120 45 T 240 60 T 360 20 L 400 15 L 400 120 L 0 120 Z"
-                    fill="url(#purpleGradient)"
-                  />
-
-                  <path
-                    d="M 0 90 Q 60 75, 120 45 T 240 60 T 360 20 L 400 15"
-                    fill="none"
-                    stroke="#a78bfa"
-                    strokeWidth="2"
-                  />
-
-                  <circle cx="120" cy="45" r="3" fill="#a78bfa" />
-                  <circle cx="240" cy="60" r="3" fill="#a78bfa" />
-                  <circle cx="400" cy="15" r="3.5" fill="#60a5fa" />
-                </svg>
-              </div>
-
-              <div className="flex items-center justify-between font-mono text-[8px] text-[#374151] pt-1">
-                <span>JAN</span>
-                <span>MAR</span>
-                <span>MAY</span>
-                <span>JUL</span>
-                <span>SEP</span>
-                <span>NOV</span>
-              </div>
-            </div>
-
-            <div className="md:col-span-4 p-3 bg-[#0D0F12] border border-white/[0.04] flex flex-col justify-between">
-              <div className="flex items-center justify-between pb-2 border-b border-white/[0.04] font-mono text-[9px]">
-                <span className="text-[#D1D5DB] font-semibold uppercase flex items-center gap-1.5">
-                  <Activity className="w-3 h-3 text-accent" />
-                  LEAD HEALTH
-                </span>
-              </div>
-
-              <div className="flex items-center justify-center py-2 relative">
-                <svg viewBox="0 0 100 100" className="w-20 h-20 transform -rotate-90">
-                  <circle cx="50" cy="50" r="38" stroke="#3b82f6" strokeWidth="14" strokeDasharray="140 240" fill="none" />
-                  <circle cx="50" cy="50" r="38" stroke="#8b5cf6" strokeWidth="14" strokeDasharray="70 240" strokeDashoffset="-145" fill="none" />
-                  <circle cx="50" cy="50" r="38" stroke="#334155" strokeWidth="14" strokeDasharray="30 240" strokeDashoffset="-220" fill="none" />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center font-mono text-center pointer-events-none">
-                  <span className="text-[10px] font-bold text-[#F3F4F6]">84%</span>
-                  <span className="text-[7px] text-[#4B5563]">HEALTHY</span>
+                <div className="salesmind-chart-labels">
+                  <span>Jan</span>
+                  <span>Mar</span>
+                  <span>May</span>
+                  <span>Jul</span>
+                  <span>Sep</span>
+                  <span>Nov</span>
                 </div>
               </div>
 
-              <div className="font-mono text-[8px] space-y-1 text-[#4B5563]">
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 inline-block"></span>
-                    High Propensity
-                  </span>
-                  <span className="font-semibold text-[#9CA3AF]">58%</span>
+              <div className="salesmind-panel salesmind-health-panel">
+                <div className="salesmind-panel-heading">
+                  <strong>
+                    <Activity size={13} /> Lead health
+                  </strong>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-purple-500 inline-block"></span>
-                    Nurture Required
-                  </span>
-                  <span className="font-semibold text-[#9CA3AF]">26%</span>
+
+                <div className="salesmind-health-ring">
+                  <svg viewBox="0 0 100 100" aria-hidden="true">
+                    <circle cx="50" cy="50" r="38" />
+                    <circle cx="50" cy="50" r="38" />
+                    <circle cx="50" cy="50" r="38" />
+                  </svg>
+                  <div>
+                    <strong>84%</strong>
+                    <span>Healthy</span>
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-600 inline-block"></span>
-                    Risk Alert
+
+                <div className="salesmind-health-list">
+                  <span>
+                    <i className="health-blue" /> High propensity <b>58%</b>
                   </span>
-                  <span className="font-semibold text-[#9CA3AF]">16%</span>
+                  <span>
+                    <i className="health-orange" /> Nurture required <b>26%</b>
+                  </span>
+                  <span>
+                    <i className="health-muted" /> Risk alert <b>16%</b>
+                  </span>
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="salesmind-copilot-panel">
+              <div>
+                <span>AI copilot / active</span>
+                <strong>Turn signals into the next action.</strong>
+              </div>
+              <div className="salesmind-copilot-lines">
+                <span>✓ Prioritized 18 follow-ups</span>
+                <span>↗ Found 6 high-intent accounts</span>
+                <span>＋ Drafted 4 outreach notes</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

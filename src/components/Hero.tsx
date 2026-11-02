@@ -3,7 +3,7 @@
 import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { HeroSystemGraph } from "./HeroSystemGraph";
 import { MicroStatusPanel } from "./MicroStatusPanel";
-import { ArrowDown, Github, ExternalLink } from "lucide-react";
+import { ArrowDown, Github } from "lucide-react";
 
 export function Hero() {
   return (

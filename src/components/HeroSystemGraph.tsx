@@ -39,13 +39,13 @@ export function HeroSystemGraph() {
     const rawNodes = [
       { id: "data", label: "DATA", sublabel: "ANALYZE & MODEL", sectionId: "#work", x3d: -0.2, y3d: -0.85, z3d: 0.2 },
       { id: "ai", label: "AI", sublabel: "NEURAL & INFERENCE", sectionId: "#work", x3d: 0.85, y3d: -0.2, z3d: -0.2 },
-      { id: "software", label: "SOFTWARE", sublabel: "SYSTEMS & BACKEND", sectionId: "#skills", x3d: 0.2, y3d: 0.85, z3d: 0.3 },
+      { id: "software", label: "SOFTWARE", sublabel: "SYSTEMS & BACKEND", sectionId: "#toolbox", x3d: 0.2, y3d: 0.85, z3d: 0.3 },
       { id: "product", label: "PRODUCT", sublabel: "UTILITY & USER", sectionId: "#about", x3d: -0.85, y3d: 0.2, z3d: -0.3 },
       { id: "core1", label: "", sublabel: "", sectionId: "", x3d: 0, y3d: 0, z3d: 0.8 },
       { id: "core2", label: "", sublabel: "", sectionId: "", x3d: 0, y3d: 0, z3d: -0.8 },
     ];
 
-    let mouse = { x: width / 2, y: height / 2, targetRotX: 0, targetRotY: 0 };
+    const mouse = { x: width / 2, y: height / 2, targetRotX: 0, targetRotY: 0 };
     let rotX = 0.2;
     let rotY = 0.4;
     let time = 0;
@@ -221,7 +221,7 @@ export function HeroSystemGraph() {
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
-        let offsetY = node.y > cy ? node.radius + 12 : -(node.radius + 12);
+        const offsetY = node.y > cy ? node.radius + 12 : -(node.radius + 12);
         ctx.fillText(node.label, node.x, node.y + offsetY);
       });
 

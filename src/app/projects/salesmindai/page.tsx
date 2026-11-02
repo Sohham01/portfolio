@@ -1,11 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  ArrowLeft,
-  CheckCircle2,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { SalesMindAIPreview } from "@/components/SalesMindAIPreview";
 
 export default function SalesMindAICaseStudy() {
@@ -27,121 +23,177 @@ export default function SalesMindAICaseStudy() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#08090B] text-[#F3F4F6] font-sans pt-20 sm:pt-24 pb-16 sm:pb-20">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 mb-6 sm:mb-8">
-        <Link
-          href="/"
-          className="touch-target inline-flex items-center gap-2 font-mono text-[11px] text-[#9CA3AF] hover:text-accent transition-colors py-2 px-3 border border-white/[0.06] hover:border-white/10"
-        >
-          <ArrowLeft className="w-3.5 h-3.5 text-accent" />
-          <span>BACK TO WORK</span>
-        </Link>
-      </div>
+    <div className="case-study-shell">
+      <div className="site-grain" aria-hidden="true" />
 
-      <article className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+      <header className="case-study-header">
+        <div className="page-frame case-study-header-inner">
+          <Link className="brand" href="/" aria-label="Sohham Choudhary home">
+            <span className="brand-mark">SC</span>
+            <span className="brand-copy">
+              <strong>Sohham Choudhary</strong>
+              <small>Data · AI · Software</small>
+            </span>
+          </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pb-12 mb-12 border-b border-white/[0.06]">
+          <span className="case-study-header-meta">Work / 01</span>
 
-          <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-3 font-mono text-[11px] text-accent uppercase tracking-widest">
-              <span className="text-[#6B7280] font-semibold">01</span>
-              <span className="text-[#374151]">/</span>
-              <span className="tracking-widest">SALESMINDAI</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-[-0.02em] text-[#F3F4F6] font-sans uppercase">
-              SalesMindAI
-            </h1>
-
-            <p className="font-mono text-sm font-semibold text-accent">
-              AI-Powered CRM
-            </p>
-
-            <p className="text-xs sm:text-sm text-[#9CA3AF] font-sans leading-relaxed">
-              A full-stack CRM that centralizes customer data, automates workflows and provides AI-powered insights to help teams sell smarter.
-            </p>
-
-            <div className="py-2 space-y-2 font-mono text-[11px] text-[#D1D5DB]">
-              {featureBullets.map((bullet, idx) => (
-                <div key={idx} className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0" />
-                  <span>{bullet}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="pt-2 flex flex-wrap items-center gap-2.5 font-mono text-[11px]">
-              <a
-                href="/projects/salesmindai/demo"
-                className="touch-target px-5 py-2.5 bg-accent hover:bg-accent-dark active:scale-[0.98] text-white font-semibold transition-all flex items-center gap-2"
-              >
-                <span>Live Demo</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-
-              <a
-                href="https://github.com/Sohham01/SalesMindAI"
-                target="_blank"
-                rel="noreferrer"
-                className="touch-target px-4 py-2.5 border border-white/[0.08] hover:border-white/15 text-[#D1D5DB] hover:text-white transition-all flex items-center gap-2"
-              >
-                <span>GitHub</span>
-                <ArrowRight className="w-3.5 h-3.5 text-[#4B5563]" />
-              </a>
-            </div>
-
-            <div className="mt-4 flex items-center gap-2 font-mono text-[10px]">
-              <a href="/projects/salesmindai/demo" className="text-accent hover:text-accent-light uppercase tracking-wider transition-colors">
-                Demo access available
-              </a>
-              <span className="text-[#2D3748]">→</span>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7">
-            <SalesMindAIPreview />
-          </div>
-
+          <Link className="case-study-back" href="/">
+            <ArrowLeft size={15} />
+            <span>Back to portfolio</span>
+          </Link>
         </div>
+      </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 sm:mb-16">
-          <div className="border border-white/[0.06] bg-[#0D0F12] p-6 space-y-3">
-            <h2 className="font-mono text-[10px] text-accent font-semibold tracking-widest uppercase">THE PROBLEM</h2>
-            <p className="text-xs sm:text-sm text-[#9CA3AF] font-sans leading-relaxed">
-              Sales information is often fragmented across customers, tasks, notes and activities, making it hard to get a clear picture and take action.
-            </p>
-          </div>
+      <main className="case-study-main">
+        <section className="case-study-hero">
+          <div className="page-frame">
+            <div className="section-kicker case-study-kicker">
+              <span className="section-kicker-index">01</span>
+              <span>/</span>
+              <span>Featured system / case study</span>
+            </div>
 
-          <div className="border border-white/[0.06] bg-[#0D0F12] p-6 space-y-3">
-            <h2 className="font-mono text-[10px] text-accent font-semibold tracking-widest uppercase">THE APPROACH</h2>
-            <p className="text-xs sm:text-sm text-[#9CA3AF] font-sans leading-relaxed">
-              Build a centralized CRM with analytics and AI-assisted workflows to help teams focus on what matters most.
-            </p>
-          </div>
-        </div>
+            <div className="case-study-hero-grid">
+              <div className="case-study-copy">
+                <span className="case-study-status">
+                  <span className="status-dot" aria-hidden="true" />
+                  Live build
+                </span>
 
-        <section className="mb-12 sm:mb-16">
-          <h2 className="font-mono text-[10px] text-accent font-semibold tracking-widest uppercase mb-6">ARCHITECTURE</h2>
+                <h1>
+                  SalesMind
+                  <br />
+                  <em>AI</em>
+                </h1>
 
-          <div className="border border-white/[0.06] bg-[#0D0F12] p-6 font-mono text-[11px]">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-center">
-              {archNodes.map((node, idx) => (
-                <div key={node.title} className="flex items-center gap-2">
-                  <div className="w-full p-3 bg-[#12151A] border border-white/[0.04] text-center flex flex-col items-center justify-center">
-                    <span className="font-semibold text-[#F3F4F6] text-xs">{node.title}</span>
-                    <span className="text-[9px] text-[#4B5563] mt-0.5">{node.subtitle}</span>
-                  </div>
+                <p className="case-study-tagline">AI-powered CRM</p>
+                <p className="case-study-description">
+                  A full-stack CRM that centralizes customer data, automates workflows and
+                  provides AI-powered insights to help teams sell smarter.
+                </p>
 
-                  {idx < archNodes.length - 1 && (
-                    <ArrowRight className="w-3.5 h-3.5 text-[#374151] hidden lg:block shrink-0" />
-                  )}
+                <div className="case-study-features">
+                  {featureBullets.map((bullet) => (
+                    <div className="case-study-feature" key={bullet}>
+                      <CheckCircle2 size={14} />
+                      <span>{bullet}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+
+                <div className="case-study-actions">
+                  <a className="button button-dark" href="/projects/salesmindai/demo">
+                    Live demo <ArrowRight size={16} />
+                  </a>
+                  <a
+                    className="button button-outline"
+                    href="https://github.com/Sohham01/SalesMindAI"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    GitHub <ArrowRight size={16} />
+                  </a>
+                </div>
+
+                <Link className="case-study-demo-link" href="/projects/salesmindai/demo">
+                  Demo access available <ArrowRight size={14} />
+                </Link>
+              </div>
+
+              <SalesMindAIPreview />
             </div>
           </div>
         </section>
 
-      </article>
+        <section className="case-study-section">
+          <div className="page-frame">
+            <div className="case-study-context-grid">
+              <article className="case-study-context-card">
+                <span>The problem</span>
+                <p>
+                  Sales information is often fragmented across customers, tasks, notes and
+                  activities, making it hard to get a clear picture and take action.
+                </p>
+              </article>
+
+              <article className="case-study-context-card">
+                <span>The approach</span>
+                <p>
+                  Build a centralized CRM with analytics and AI-assisted workflows to help teams
+                  focus on what matters most.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className="case-study-section case-study-architecture-section">
+          <div className="page-frame">
+            <div className="case-study-section-heading">
+              <div className="section-kicker">
+                <span className="section-kicker-index">02</span>
+                <span>/</span>
+                <span>Architecture</span>
+              </div>
+              <p>Five layers from interface to model provider.</p>
+            </div>
+
+            <div className="case-study-architecture">
+              {archNodes.map((node, index) => (
+                <div className="case-study-architecture-node" key={node.title}>
+                  <div>
+                    <strong>{node.title}</strong>
+                    <span>{node.subtitle}</span>
+                  </div>
+                  {index < archNodes.length - 1 && <ArrowRight size={16} />}
+                </div>
+              ))}
+            </div>
+
+            <div className="case-study-engineering">
+              <div className="case-study-engineering-heading">
+                <div className="section-kicker">
+                  <span className="section-kicker-index">03</span>
+                  <span>/</span>
+                  <span>Build notes</span>
+                </div>
+                <p>Implementation details from the project repository.</p>
+              </div>
+
+              <div className="case-study-engineering-grid">
+                <article>
+                  <span>Backend</span>
+                  <strong>FastAPI + SQLAlchemy + Pydantic</strong>
+                  <p>25+ REST endpoints across authentication, customers, tasks, notes, analytics and AI workflows.</p>
+                </article>
+                <article>
+                  <span>Data layer</span>
+                  <strong>PostgreSQL + Alembic</strong>
+                  <p>Six SQLAlchemy models with migrations applied automatically during startup.</p>
+                </article>
+                <article>
+                  <span>AI routing</span>
+                  <strong>Four-provider fallback chain</strong>
+                  <p>Groq, OpenRouter, Cerebras and Gemini can be tried in sequence when automatic routing is enabled.</p>
+                </article>
+                <article>
+                  <span>Security + deployment</span>
+                  <strong>JWT auth · Vercel + Render</strong>
+                  <p>Access and refresh tokens, login rate limiting, CORS controls and separate frontend/backend deployment.</p>
+                </article>
+              </div>
+            </div>
+
+            <div className="case-study-bottomline">
+              <span>SalesMindAI / 001</span>
+              <Link href="/">
+                Back to selected work <ArrowLeft size={14} />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

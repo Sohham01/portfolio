@@ -12,7 +12,14 @@ export interface Project {
   demoUrl?: string;
   metrics?: { label: string; value: string }[];
   architecture?: { from: string; to: string; label: string }[];
+  tracks?: ProjectTrack[];
+  problem?: string;
+  contribution?: string;
+  highlight?: string;
+  status?: "live" | "in-progress";
 }
+
+export type ProjectTrack = "ai" | "software" | "data" | "product";
 
 export interface SkillCategory {
   title: string;
@@ -53,7 +60,7 @@ export const PORTFOLIO_DATA = {
     degree: "BS Data Science & Artificial Intelligence",
     period: "2025 — 2029",
     location: "Sambalpur, Odisha, India",
-    bio: "I'm Sohham Choudhary, a Data Science & AI student at IIM Sambalpur who enjoys turning ideas into useful products.",
+    bio: "I'm a Data Science & AI student at IIM Sambalpur who builds useful products across software engineering, data analysis, machine learning and technical product development.",
     aboutLong: [
       "I'm currently pursuing a BS in Data Science & Artificial Intelligence at IIM Sambalpur.",
       "My interests sit at the intersection of software engineering, data, AI and product thinking.",
@@ -117,6 +124,11 @@ export const PORTFOLIO_DATA = {
       caseStudyUrl: "/projects/salesmindai",
       githubUrl: "https://github.com/Sohham01/SalesMindAI",
       demoUrl: "/projects/salesmindai/demo",
+      tracks: ["ai", "software", "data", "product"],
+      problem: "Sales information is fragmented across customers, tasks, notes and activities.",
+      contribution: "Built the full-stack CRM experience, API layer and AI-assisted workflows.",
+      highlight: "Multi-provider LLM fallback · CSV/XLSX data pipeline",
+      status: "live",
       metrics: [
         { label: "AI Engine", value: "Multi-provider fallback" },
         { label: "CRM Workflows", value: "Scoring · Health · Tasks" },
@@ -135,11 +147,16 @@ export const PORTFOLIO_DATA = {
       number: "02",
       title: "F1 Analysis",
       category: "DATA ANALYSIS",
-      tagline: "Explore relationships between qualifying position, grid position and race results.",
-      description: "A comprehensive data analysis project examining Formula 1 race telemetry across multiple racing seasons.",
+      tagline: "Interactive analytics hub for drivers, constructors, race weekends and predictions.",
+      description: "A Streamlit dashboard exploring historical Formula 1 data through cleaning, visualization, feature engineering and regression modeling.",
       tech: ["Python", "Pandas", "Matplotlib", "Seaborn"],
       featured: false,
       githubUrl: "https://github.com/Sohham01/F1-analysis-project",
+      demoUrl: "https://f1-analysis-proj.streamlit.app/",
+      tracks: ["data"],
+      problem: "Make historical race, driver and constructor data easier to explore and compare.",
+      contribution: "Contributed to the dashboard, analysis workflows and predictive modeling experience.",
+      highlight: "Interactive dashboard · regression modeling",
       metrics: [
         { label: "Telemetry Records", value: "Multi-Season Dataset" },
         { label: "Correlation Focus", value: "Qualifying vs Race Finish" }
@@ -155,6 +172,10 @@ export const PORTFOLIO_DATA = {
       tech: ["Python", "TensorFlow", "CNN", "OpenCV"],
       featured: false,
       githubUrl: "https://github.com/Sohham01/Facial-recognition",
+      tracks: ["ai"],
+      problem: "Classify human facial expressions from image or video input.",
+      contribution: "Worked on a CNN-based recognition pipeline using the FER-2013 dataset.",
+      highlight: "7 emotion classes · real-time webcam flow",
       metrics: [
         { label: "Model Architecture", value: "Custom 4-Block CNN" },
         { label: "Training Dataset", value: "FER-2013 Dataset" }
@@ -170,6 +191,10 @@ export const PORTFOLIO_DATA = {
       tech: ["Python", "NumPy", "SciPy", "Matplotlib"],
       featured: false,
       githubUrl: "https://github.com/Sohham01/SVD-Image-Compression",
+      tracks: ["data"],
+      problem: "Explore the trade-off between image size and reconstruction quality.",
+      contribution: "Applied SVD to image matrices and examined reconstruction quality.",
+      highlight: "Low-rank approximation · PSNR and energy spectrum",
       metrics: [
         { label: "Core Concept", value: "Low-Rank Matrix Approx" },
         { label: "Evaluation", value: "PSNR & Energy Spectrum" }
@@ -185,10 +210,26 @@ export const PORTFOLIO_DATA = {
       tech: ["Python", "Streamlit", "NLP", "PyPDF2"],
       featured: false,
       githubUrl: "https://github.com/Sohham01/AI_Resume_Analyzer",
+      tracks: ["ai", "product"],
+      problem: "Give candidates useful feedback on resume and job-description alignment.",
+      contribution: "Built document parsing and ATS-oriented feedback flows.",
+      highlight: "ATS audit · job matching · STAR optimizer",
       metrics: [
         { label: "Core Focus", value: "ATS Match Scoring" },
         { label: "Document Processing", value: "PDF & Text Parsing" }
       ]
+    },
+    {
+      id: "reddit-community-intelligence",
+      number: "06",
+      title: "Reddit Community Intelligence",
+      category: "DATA / PRODUCT",
+      tagline: "End-to-end community analytics project currently under development.",
+      description: "An in-progress project exploring how community data can be organized into useful signals and decisions.",
+      tech: [],
+      featured: false,
+      tracks: ["data", "product"],
+      status: "in-progress"
     }
   ] as Project[],
 

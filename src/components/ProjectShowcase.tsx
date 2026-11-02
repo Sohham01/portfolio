@@ -43,7 +43,7 @@ export function ProjectShowcase() {
         )}
 
         <div className="mt-8">
-          {secondaryProjects.map((project, idx) => (
+          {secondaryProjects.map((project) => (
             <a
               key={project.id}
               href={project.githubUrl}

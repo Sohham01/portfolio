@@ -17,7 +17,8 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Sohham Choudhary — Building useful intelligence",
   description:
-    "The portfolio of Sohham Choudhary: a Data Science & AI student building useful products with data, software and thoughtful systems.",
+    "Sohham Choudhary is a Data Science & AI student building useful products across data, machine learning, software engineering and technical product development.",
+  metadataBase: new URL("https://sohhamchoudhary.dev"),
   keywords: [
     "Sohham Choudhary",
     "Data Science",
